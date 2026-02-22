@@ -1,4 +1,4 @@
-function SortBar() {
+const SortBar = () => {
     return (
         <div className="sort-bar">
 

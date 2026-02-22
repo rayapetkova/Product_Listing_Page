@@ -1,6 +1,6 @@
-import product from "../assets/product.png"
+import product from "../assets/product.png";
 
-function ProductGrid() {
+const ProductGrid = () => {
     return (
         <div className="product-grid">
             <div className="product-card">

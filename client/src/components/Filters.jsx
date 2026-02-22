@@ -1,4 +1,4 @@
-function Filters() {
+const Filters = () => {
     return (
         <div className="filters-container">
             <h3>Filters</h3>
