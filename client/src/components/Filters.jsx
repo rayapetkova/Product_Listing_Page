@@ -1,34 +1,43 @@
-const Filters = () => {
+import { getCategories } from "../services/productsService";
+
+const Filters = ({ filters, setFilters }) => {
+    const categories = getCategories();
+
+    const handleCategoryChange = (e) => {
+        setFilters(prev => {
+            if (e.target.checked) {
+                return {
+                    ...prev,
+                    categories: [...prev.categories, e.target.name]
+                }
+            } else {
+                return {
+                    ...prev,
+                    categories: prev.categories.filter(category => category !== e.target.name)
+                }
+            }
+        })
+    };
+
     return (
         <div className="filters-container">
             <h3>Filters</h3>
 
             <div className="filter-section">
-                <h4>Color</h4>
+                <h4>Category</h4>
 
-                <div>
-                    <input type="checkbox" id="black" />
-                    <label htmlFor="black">Black</label>
-                </div>
-
-                <div>
-                    <input type="checkbox" id="brown" />
-                    <label htmlFor="brown">Brown</label>
-                </div>
-
-                <div>
-                    <input type="checkbox" id="white" />
-                    <label htmlFor="white">White</label>
-                </div>
-            </div>
-
-            <div className="filter-section">
-                <h4>Price</h4>
-
-                <div className="price-inputs">
-                    <input type="number" placeholder="Min" />
-                    <input type="number" placeholder="Max" />
-                </div>
+                {categories.map(category => (
+                    <div key={categories.indexOf(category)}>
+                        <input
+                            type="checkbox"
+                            name={category}
+                            id={category}
+                            onChange={e => handleCategoryChange(e)}
+                            checked={filters.categories.includes(category)}
+                        />
+                        <label htmlFor={category}>{category}</label>
+                    </div>
+                ))}
             </div>
         </div>
     );
