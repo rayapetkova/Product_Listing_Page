@@ -1,0 +1,24 @@
+export const products = [
+    {
+        "id": 1,
+        "name": "Classic Bag",
+        "category": "Bags",
+        "description": "A stylish bag for everyday use.",
+        "price": 120,
+        "rating": 4.5,
+        "imageUrl": "https://images.pexels.com/photos/6167872/pexels-photo-6167872.jpeg",
+        "color": "brown"
+    },
+    {
+        "id": 2,
+        "name": "Running Sneakers",
+        "category": "Shoes",
+        "description": "Comfortable running sneakers for all terrains.",
+        "price": 80,
+        "rating": 4.0,
+        "imageUrl": "https://images.pexels.com/photos/6167872/pexels-photo-6167872.jpeg",
+        "color": "white"
+    }
+]
+
+export const categories = ["shoes", "bags", "clothes"];
