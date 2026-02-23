@@ -1,10 +1,16 @@
 import styles from '../App.module.css';
 
-import ProductGrid from "./ProductGrid";
+import ProductGrid from "./products/ProductGrid";
 import SortBar from "./SortBar";
 import Filters from "./Filters";
 
+import { useState, useEffect } from "react";
+
 const Home = () => {
+    const [filters, setFilters] = useState({
+        categories: []
+    });
+
     return (
         <>
             <section className={styles["category-header"]}>
@@ -18,14 +24,14 @@ const Home = () => {
             <div className={styles["content-layout"]}>
 
                 <aside className={styles["filters"]}>
-                    <Filters />
+                    <Filters filters={filters} setFilters={setFilters} />
                 </aside>
 
                 <section className={styles["products-section"]}>
 
                     <SortBar />
 
-                    <ProductGrid />
+                    <ProductGrid filters={filters} />
 
                     <div className={styles["load-more-container"]}>
                         <button className={styles["load-more-btn"]}>

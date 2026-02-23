@@ -4,7 +4,7 @@ export function getProducts(filters) {
     let filteredProducts = products;
 
     if (filters.categories && filters.categories.length > 0) {
-        filteredProducts = filteredProducts.filter(product => filters.categories.includes(product.category));
+        filteredProducts = filteredProducts.filter((product) => filters.categories.includes(product.category.toLowerCase()));
     }
 
     return filteredProducts;
