@@ -59,6 +59,10 @@ export function deleteProduct(productId) {
     const productIdx = productsData.findIndex(x => x.id == productId);
     productsData.splice(productIdx, 1)
 
+    for (let i=productIdx; i < productsData.length; i++) {
+        productsData[i].id = productsData[i].id - 1;
+    }
+
     localStorage.setItem("products", JSON.stringify(productsData));
     return productsData;
 }

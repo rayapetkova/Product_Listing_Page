@@ -10,6 +10,7 @@ const Product = ({ product }) => {
 
             <Link to={`/${product.id}`}>More Details</Link>
             <Link to={`/${product.id}/edit`}>Edit</Link>
+            <Link to={`/${product.id}/delete`}>Delete</Link>
             <button>Add to Cart</button>
         </div>
     );
