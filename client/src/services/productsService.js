@@ -14,6 +14,10 @@ export function getCategories() {
     return categories;
 }
 
+export function getProductById(productId) {
+    return products.find(p => p.id == productId);
+}
+
 export function addProduct(data) {
     products.push(data);
 
