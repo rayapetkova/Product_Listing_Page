@@ -22,6 +22,13 @@ export function getCategories() {
     return categories;
 }
 
+export function getLastProductId() {
+    const productsData = getProducts();
+    const sortedProducts = productsData.sort((a, b) => b.id - a.id);
+
+    return sortedProducts[0].id;
+}
+
 export function getProductById(productId) {
     const productsData = getProducts();
     return productsData.find(p => p.id == productId);
@@ -29,19 +36,17 @@ export function getProductById(productId) {
 
 export function addProduct(data) {
     const productsData = getProducts();
-    const lastProduct = productsData[productsData.length - 1];
-    const currentProductId = lastProduct ? lastProduct.id + 1 : 1;
 
-    data.id = currentProductId;
+    data.id = getLastProductId() + 1;
     productsData.push(data);
-    localStorage.setItem("products", JSON.stringify(productsData));
 
+    localStorage.setItem("products", JSON.stringify(productsData));
     return data;
 }
 
 export function editProduct(productId, data) {
     const productsData = getProducts();
-    const productIdx = productsData.findIndex(x => x.id == productId);
+    const productIdx = productsData.findIndex(x => x.id == Number(productId));
 
     productsData[productIdx] = data;
     localStorage.setItem("products", JSON.stringify(productsData));
