@@ -1,4 +1,4 @@
-export const products = [
+[
     {
         "id": 1,
         "name": "Classic Bag",
@@ -20,5 +20,3 @@ export const products = [
         "color": "white"
     }
 ]
-
-export const categories = ["shoes", "bags", "clothes"];

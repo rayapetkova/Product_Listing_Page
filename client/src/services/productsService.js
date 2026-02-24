@@ -1,7 +1,15 @@
-import { categories, products } from "../data/products";
+import { categories } from "../data/categories";
+import products from '../data/products';
 
-export function getProducts(filters) {
-    let filteredProducts = products;
+export function getProducts(filters = {}) {
+    let filteredProducts = localStorage.getItem("products");
+
+    if (!filteredProducts) {
+        filteredProducts = products;
+        localStorage.setItem("products", JSON.stringify(products));
+    } else {
+        filteredProducts = JSON.parse(filteredProducts);
+    }
 
     if (filters.categories && filters.categories.length > 0) {
         filteredProducts = filteredProducts.filter((product) => filters.categories.includes(product.category.toLowerCase()));
@@ -15,25 +23,37 @@ export function getCategories() {
 }
 
 export function getProductById(productId) {
-    return products.find(p => p.id == productId);
+    const productsData = getProducts();
+    return productsData.find(p => p.id == productId);
 }
 
 export function addProduct(data) {
-    products.push(data);
+    const productsData = getProducts();
+    const lastProduct = productsData[productsData.length - 1];
+    const currentProductId = lastProduct ? lastProduct.id + 1 : 1;
+
+    data.id = currentProductId;
+    productsData.push(data);
+    localStorage.setItem("products", JSON.stringify(productsData));
 
     return data;
 }
 
 export function editProduct(productId, data) {
-    const productIdx = products.findIndex(x => x.id == productId);
-    products[productIdx] = data;
+    const productsData = getProducts();
+    const productIdx = productsData.findIndex(x => x.id == productId);
 
-    return products[productIdx];
+    productsData[productIdx] = data;
+    localStorage.setItem("products", JSON.stringify(productsData));
+
+    return productsData[productIdx];
 }
 
 export function deleteProduct(productId) {
-    const productIdx = products.findIndex(x => x.id == productId);
-    products.splice(productIdx, 1)
+    const productsData = getProducts();
+    const productIdx = productsData.findIndex(x => x.id == productId);
+    productsData.splice(productIdx, 1)
 
-    return products;
+    localStorage.setItem("products", JSON.stringify(productsData));
+    return productsData;
 }
