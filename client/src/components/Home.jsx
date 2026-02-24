@@ -1,10 +1,11 @@
 import styles from '../App.module.css';
 
-import ProductGrid from "./products/ProductGrid";
+import ProductGrid from "./productsDisplay/ProductsDisplay";
 import SortBar from "./SortBar";
 import Filters from "./Filters";
+import { Link } from "react-router-dom";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const Home = () => {
     const [filters, setFilters] = useState({
@@ -19,6 +20,10 @@ const Home = () => {
                     Discover our premium collection of stylish and functional bags
                     designed for every occasion.
                 </p>
+
+                <Link to="/add" className={styles["add-product-btn"]}>
+                    Add Product
+                </Link>
             </section>
 
             <div className={styles["content-layout"]}>
