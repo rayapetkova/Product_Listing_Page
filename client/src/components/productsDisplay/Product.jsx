@@ -8,6 +8,7 @@ const Product = ({ product }) => {
             <p>{product.description}</p>
             <p>${product.price}</p>
 
+            <Link to={`/${product.id}`}>More Details</Link>
             <Link to={`/${product.id}/edit`}>Edit</Link>
             <button>Add to Cart</button>
         </div>
