@@ -1,9 +1,7 @@
-import { useFormik } from 'formik';
-import { addProduct, deleteProduct, getProductById } from '../../services/productsService';
-import { productSchema } from '../../schemas/productSchema';
+import styles from './DeleteProduct.module.css';
+import { deleteProduct, getProductById } from '../../services/productsService';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { categories } from '../../data/categories';
-import Product from '../productsDisplay/Product';
+import ProductCard from '../productsDisplay/productCard/ProductCard';
 import { useEffect, useState } from 'react';
 
 const formNames = {
@@ -37,15 +35,35 @@ const DeleteProduct = () => {
     }
 
     return (
-        <div>
-            <h2>Remove Product</h2>
+        <div className={styles["delete-wrapper"]}>
+            <div className={styles["delete-card"]}>
+                <h2>Remove Product</h2>
 
-            <Product product={product} />
+                <p className={styles["warning-text"]}>
+                    Are you sure you want to permanently remove this product?
+                    This action cannot be undone.
+                </p>
 
-            <form onSubmit={deleteProductSubmitHandler}>
-                <button type="submit">Yes, I'm sure</button>
-                <Link to={`/${product.id}`}>Back to Product</Link>
-            </form>
+                <ProductCard product={product} />
+
+                <form onSubmit={deleteProductSubmitHandler}>
+                    <div className={styles["delete-actions"]}>
+                        <button
+                            type="submit"
+                            className={styles["delete-btn"]}
+                        >
+                            Yes, Delete
+                        </button>
+
+                        <Link
+                            to={`/${product.id}`}
+                            className={styles["cancel-link"]}
+                        >
+                            Cancel
+                        </Link>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }
