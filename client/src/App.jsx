@@ -8,6 +8,7 @@ import ProductDetails from './components/productsDisplay/productDetails/ProductD
 import Home from './components/home/Home';
 import Cart from './components/cart/Cart';
 import CategoryProductsDisplay from './components/categoryProductsDisplay/CategoryProductsDisplay';
+import NotFound404 from './components/notFound404/NotFound404';
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                     <Route path="/:productId/delete" element={<DeleteProduct />} />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/categories/:categoryName" element={<CategoryProductsDisplay />} />
+                    <Route path='*' element={<NotFound404 />} />
                 </Routes>
             </main>
         </div>
