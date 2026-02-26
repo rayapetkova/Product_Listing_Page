@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --card-bg: #FFFFFF;
+}
+
+.filters-container {
+    background-color: var(--card-bg);
+    padding: 24px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-family: 'Montserrat', sans-serif;
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.filters-container h3 {
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0 0 8px 0;
+    color: #111827;
+}
+
+.filter-section h4 {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #6B7280;
+}
+
+.filter-section div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.filter-section input[type="checkbox"] {
+    margin-right: 8px;
+    width: 18px;
+    height: 18px;
+    accent-color: #4F46E5;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.filter-section label {
+    font-size: 15px;
+    color: #111827;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .filters-container {
+        max-height: none;
+    }
+}
