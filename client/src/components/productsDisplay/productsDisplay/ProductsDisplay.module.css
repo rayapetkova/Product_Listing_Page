@@ -1,0 +1,10 @@
+.products-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.products-grid p {
+    font-size: 1rem;
+    color: #6B7280;
+}
