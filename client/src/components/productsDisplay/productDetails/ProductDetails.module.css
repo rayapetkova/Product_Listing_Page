@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.product-details {
+    max-width: 900px;
+    margin: 32px auto;
+    padding: 32px;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    font-family: 'Montserrat', sans-serif;
+    flex-wrap: wrap;
+}
+
+.left {
+    flex: 1 1 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+}
+
+.image-container {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+.left h3 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+.right {
+    flex: 2 1 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.right p {
+    font-size: 16px;
+    color: #6B7280;
+    margin: 0;
+}
+
+.product-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.product-details a {
+    font-size: 15px;
+    color: #4F46E5;
+    text-decoration: none;
+    margin-top: 16px;
+}
+
+.product-details a:hover {
+    color: #4338CA;
+}
+
+.product-details button {
+    margin-top: 8px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    background-color: #4F46E5;
+    color: #FFFFFF;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.product-details button:hover {
+    background-color: #4338CA;
+}
+
+@media (max-width: 768px) {
+    .product-details {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left, .right {
+        width: 100%;
+        text-align: center;
+    }
+
+    .image-container {
+        max-width: 100%;
+    }
+}
