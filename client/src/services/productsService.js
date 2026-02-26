@@ -1,4 +1,5 @@
 import { categories } from "../data/categories";
+import { colors } from "../data/colors";
 import products from '../data/products';
 
 export function getProducts(filters = {}, sortingOption = "az") {
@@ -13,6 +14,10 @@ export function getProducts(filters = {}, sortingOption = "az") {
 
     if (filters.categories && filters.categories.length > 0) {
         filteredProducts = filteredProducts.filter((product) => filters.categories.includes(product.category.toLowerCase()));
+    }
+
+    if (filters.colors && filters.colors.length > 0) {
+        filteredProducts = filteredProducts.filter((product) => filters.colors.includes(product.color.toLowerCase()));
     }
 
     switch (sortingOption) {
@@ -35,6 +40,10 @@ export function getProducts(filters = {}, sortingOption = "az") {
 
 export function getCategories() {
     return categories;
+}
+
+export function getColors() {
+    return colors;
 }
 
 export function getLastProductId() {
