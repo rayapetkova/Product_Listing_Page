@@ -1,0 +1,113 @@
+/* Import Montserrat font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.product-card {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.product-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 8px 0;
+    color: #111827;
+}
+
+.product-card p {
+    font-size: 15px;
+    color: #6B7280;
+    margin: 4px 0;
+}
+
+.rating-container {
+    margin: 8px 0;
+}
+
+.star-filled {
+    color: #facc15;
+    font-size: 19px;
+    margin-right: 2px;
+}
+
+.star-empty {
+    color: #cbcfd4;
+    font-size: 19px;
+    margin-right: 2px;
+}
+
+.product-card-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.product-card a {
+    font-size: 14px;
+    color: #4F46E5;
+    text-decoration: none;
+    margin: 4px 0;
+}
+
+.product-card a:hover {
+    color: #4338CA;
+    text-decoration: underline;
+}
+
+.remove-from-cart-button {
+    padding: 10px 20px;
+    background-color: #DC2626;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.success-message {
+    color: green;
+    font-weight: 600;
+}
+
+.error-message {
+    color: red;
+    font-weight: 600;
+}
+
+.product-card button {
+    margin-top: 8px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 12px;
+    background-color: #4F46E5;
+    color: #FFFFFF;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.product-card button:hover {
+    background-color: #4338CA;
+}
+
+.product-card button.remove-from-cart-button {
+    background-color: #DC2626;
+}
+
+.product-card button.remove-from-cart-button:hover {
+    background-color: #B91C1C;
+}
+
+@media (max-width: 768px) {
+    .product-card img {
+        height: 150px;
+    }
+}
