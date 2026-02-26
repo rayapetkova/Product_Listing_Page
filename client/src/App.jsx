@@ -19,10 +19,10 @@ function App() {
             <main className={styles["main"]}>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/add" element={<ProductsAdd />} />
-                    <Route path="/:productId" element={<ProductDetails />} />
-                    <Route path="/:productId/edit" element={<EditProduct />} />
-                    <Route path="/:productId/delete" element={<DeleteProduct />} />
+                    <Route path="/products/add" element={<ProductsAdd />} />
+                    <Route path="/products/:productId" element={<ProductDetails />} />
+                    <Route path="/products/:productId/edit" element={<EditProduct />} />
+                    <Route path="/products/:productId/delete" element={<DeleteProduct />} />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/categories/:categoryName" element={<CategoryProductsDisplay />} />
                     <Route path='*' element={<NotFound404 />} />
