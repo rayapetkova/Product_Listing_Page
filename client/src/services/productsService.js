@@ -61,32 +61,50 @@ export function getProductById(productId) {
 export function addProduct(data) {
     const productsData = getProducts();
 
-    data.id = getLastProductId() + 1;
-    productsData.push(data);
+    try {
+        data.id = getLastProductId() + 1;
+        productsData.push(data);
 
-    localStorage.setItem("products", JSON.stringify(productsData));
-    return data;
+        localStorage.setItem("products", JSON.stringify(productsData));
+
+        return ["Product added successfully", "success"];
+    } catch (err) {
+        return ["An error occurred while adding the product", "error"];
+    }
+
 }
 
 export function editProduct(productId, data) {
     const productsData = getProducts();
-    const productIdx = productsData.findIndex(x => x.id == Number(productId));
 
-    productsData[productIdx] = data;
-    localStorage.setItem("products", JSON.stringify(productsData));
+    try {
+        const productIdx = productsData.findIndex(x => x.id == Number(productId));
 
-    return productsData[productIdx];
+        productsData[productIdx] = data;
+        localStorage.setItem("products", JSON.stringify(productsData));
+
+        return ["Product edited successfully", "success"];
+    } catch (err) {
+        return ["An error occurred while editing the product", "error"];
+    }
+
 }
 
 export function deleteProduct(productId) {
     const productsData = getProducts();
-    const productIdx = productsData.findIndex(x => x.id == productId);
-    productsData.splice(productIdx, 1)
 
-    for (let i=productIdx; i < productsData.length; i++) {
-        productsData[i].id = productsData[i].id - 1;
+    try {
+        const productIdx = productsData.findIndex(x => x.id == productId);
+        productsData.splice(productIdx, 1)
+
+        for (let i = productIdx; i < productsData.length; i++) {
+            productsData[i].id = productsData[i].id - 1;
+        }
+
+        localStorage.setItem("products", JSON.stringify(productsData));
+        return ["Product deleted successfully", "success"];
+    } catch (err) {
+        return ["An error occurred while deleting the product", "error"];
     }
 
-    localStorage.setItem("products", JSON.stringify(productsData));
-    return productsData;
 }
