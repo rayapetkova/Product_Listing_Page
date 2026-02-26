@@ -5,13 +5,25 @@ import SortBar from '../sortBar/SortBar';
 import Filters from "../filters/Filters";
 import { Link } from "react-router-dom";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getProducts } from '../../services/productsService';
 
 const Home = () => {
+    const [products, setProducts] = useState([])
     const [sortingOption, setSortingOption] = useState("az");
     const [filters, setFilters] = useState({
-        categories: []
+        categories: [],
+        colors: []
     });
+
+    useEffect(() => {
+        function loadProducts() {
+            const products = getProducts(filters, sortingOption);
+            setProducts(products);
+        }
+
+        loadProducts();
+    }, [filters, sortingOption])
 
     function sortingOptionSetter(option) {
         setSortingOption(option);
@@ -20,10 +32,9 @@ const Home = () => {
     return (
         <>
             <section className={styles["category-header"]}>
-                <h1>Bags</h1>
+                <h1>Add a product</h1>
                 <p>
-                    Discover our premium collection of stylish and functional bags
-                    designed for every occasion.
+                    Do you have a product that you want to sell? Add it to our marketplace and reach a wide audience of potential buyers.
                 </p>
 
                 <Link to="/add" className={styles["add-product-btn"]}>
@@ -39,9 +50,9 @@ const Home = () => {
 
                 <section className={styles["products-section"]}>
 
-                    <SortBar sortingOptionSetter={sortingOptionSetter} />
+                    <SortBar productsCount={products.length} sortingOptionSetter={sortingOptionSetter} />
 
-                    <ProductGrid filters={filters} sortingOption={sortingOption} />
+                    <ProductGrid products={products} filters={filters} sortingOption={sortingOption} />
 
                     <div className={styles["load-more-container"]}>
                         <button className={styles["load-more-btn"]}>

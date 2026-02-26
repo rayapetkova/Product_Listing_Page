@@ -1,3 +1,4 @@
+import styles from './ProductsAdd.module.css';
 import { useFormik } from 'formik';
 import { addProduct } from '../../services/productsService';
 import { productSchema } from '../../schemas/productSchema';
@@ -16,7 +17,7 @@ const formNames = {
 
 const ProductsAdd = () => {
     const navigate = useNavigate();
-    
+
     const addProductSubmitHandler = (values) => {
         addProduct(values);
 
@@ -38,93 +39,132 @@ const ProductsAdd = () => {
     })
 
     return (
-        <div>
-            <h2>Add New Product</h2>
+        <div className={styles["form-wrapper"]}>
+            <div className={styles["form-card"]}>
+                <h2>Add New Product</h2>
 
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="name">Name:</label><br />
-                <input
-                    type="text"
-                    id={formNames.name}
-                    name={formNames.name}
-                    value={values.name}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                />
+                <form onSubmit={handleSubmit}>
 
-                {(errors.name && touched.name) && <p>{errors.name}</p>}<br /><br />
+                    {/* Name */}
+                    <div className={styles["form-group"]}>
+                        <label htmlFor="name">Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value={values.name}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        {(errors.name && touched.name) &&
+                            <p className={styles["error-text"]}>{errors.name}</p>}
+                    </div>
 
-                <label>
-                    Category:
-                    <select name={formNames.category} value={values.category} onChange={handleChange} onBlur={handleBlur}>
-                        {categories.map((category) => (
-                            <option key={category} value={category}>{category}</option>
-                        ))}
-                    </select>
-                </label>
+                    {/* Category */}
+                    <div className={styles["form-group"]}>
+                        <label htmlFor="category">Category</label>
+                        <select
+                            id="category"
+                            name="category"
+                            value={values.category}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        >
+                            <option value="">Select category</option>
+                            {categories.map(category => (
+                                <option key={category} value={category}>
+                                    {category}
+                                </option>
+                            ))}
+                        </select>
+                        {(errors.category && touched.category) &&
+                            <p className={styles["error-text"]}>{errors.category}</p>}
+                    </div>
 
-                {(errors.category && touched.category) && <p>{errors.category}</p>}<br /><br />
+                    {/* Description */}
+                    <div className={styles["form-group"]}>
+                        <label htmlFor="description">Description</label>
+                        <textarea
+                            id="description"
+                            name="description"
+                            value={values.description}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        {(errors.description && touched.description) &&
+                            <p className={styles["error-text"]}>{errors.description}</p>}
+                    </div>
 
-                <label htmlFor="description">Description:</label><br />
-                <textarea
-                    id={formNames.description}
-                    name={formNames.description}
-                    value={values.description}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                ></textarea>
-                {(errors.description && touched.description) && <p>{errors.description}</p>}<br /><br />
+                    {/* Price */}
+                    <div className={styles["form-group"]}>
+                        <label htmlFor="price">Price</label>
+                        <input
+                            type="number"
+                            id="price"
+                            name="price"
+                            step="0.01"
+                            value={values.price}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        {(errors.price && touched.price) &&
+                            <p className={styles["error-text"]}>{errors.price}</p>}
+                    </div>
 
-                <label htmlFor="price">Price:</label><br />
-                <input
-                    type="number"
-                    id="price"
-                    name="price"
-                    step="0.01"
-                    value={values.price}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                />
-                {(errors.price && touched.price) && <p>{errors.price}</p>}<br /><br />
+                    {/* Rating */}
+                    <div className={styles["form-group"]}>
+                        <label htmlFor="rating">Rating</label>
+                        <input
+                            type="number"
+                            id="rating"
+                            name="rating"
+                            step="0.1"
+                            min="0"
+                            max="5"
+                            value={values.rating}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        {(errors.rating && touched.rating) &&
+                            <p className={styles["error-text"]}>{errors.rating}</p>}
+                    </div>
 
-                <label htmlFor="rating">Rating:</label><br />
-                <input
-                    type="number"
-                    id="rating"
-                    name="rating"
-                    step="0.1"
-                    min="0"
-                    max="5"
-                    value={values.rating}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                />
-                {(errors.rating && touched.rating) && <p>{errors.rating}</p>}<br /><br />
+                    {/* Image URL */}
+                    <div className={styles["form-group"]}>
+                        <label htmlFor="imageUrl">Image URL</label>
+                        <input
+                            type="url"
+                            id="imageUrl"
+                            name="imageUrl"
+                            value={values.imageUrl}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        {(errors.imageUrl && touched.imageUrl) &&
+                            <p className={styles["error-text"]}>{errors.imageUrl}</p>}
+                    </div>
 
-                <label htmlFor="imageUrl">Image URL:</label><br />
-                <input
-                    type="url"
-                    id="imageUrl"
-                    name="imageUrl"
-                    value={values.imageUrl}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                />
-                {(errors.imageUrl && touched.imageUrl) && <p>{errors.imageUrl}</p>}<br /><br />
+                    {/* Color */}
+                    <div className={styles["form-group"]}>
+                        <label htmlFor="color">Color</label>
+                        <input
+                            type="text"
+                            id="color"
+                            name="color"
+                            value={values.color}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        {(errors.color && touched.color) &&
+                            <p className={styles["error-text"]}>{errors.color}</p>}
+                    </div>
 
-                <label htmlFor="color">Color:</label><br />
-                <input
-                    type="text"
-                    id="color"
-                    name="color"
-                    value={values.color}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                />
-                {(errors.color && touched.color) && <p>{errors.color}</p>}<br /><br />
+                    <button type="submit" className={styles["submit-btn"]}>
+                        Add Product
+                    </button>
 
-                <button type="submit">Add Product</button>
-            </form>
+                </form>
+            </div>
         </div>
     );
 }
