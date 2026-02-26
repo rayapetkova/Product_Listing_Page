@@ -1,16 +1,21 @@
-import styles from '../App.module.css';
+import styles from './Home.module.css';
 
-import ProductGrid from "./productsDisplay/ProductsDisplay";
-import SortBar from "./SortBar";
-import Filters from "./Filters";
+import ProductGrid from "../productsDisplay/productsDisplay/ProductsDisplay";
+import SortBar from '../sortBar/SortBar';
+import Filters from "../filters/Filters";
 import { Link } from "react-router-dom";
 
 import { useState } from "react";
 
 const Home = () => {
+    const [sortingOption, setSortingOption] = useState("az");
     const [filters, setFilters] = useState({
         categories: []
     });
+
+    function sortingOptionSetter(option) {
+        setSortingOption(option);
+    }
 
     return (
         <>
@@ -34,9 +39,9 @@ const Home = () => {
 
                 <section className={styles["products-section"]}>
 
-                    <SortBar />
+                    <SortBar sortingOptionSetter={sortingOptionSetter} />
 
-                    <ProductGrid filters={filters} />
+                    <ProductGrid filters={filters} sortingOption={sortingOption} />
 
                     <div className={styles["load-more-container"]}>
                         <button className={styles["load-more-btn"]}>

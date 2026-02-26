@@ -1,7 +1,7 @@
 import { categories } from "../data/categories";
 import products from '../data/products';
 
-export function getProducts(filters = {}) {
+export function getProducts(filters = {}, sortingOption = "az") {
     let filteredProducts = localStorage.getItem("products");
 
     if (!filteredProducts) {
@@ -13,6 +13,21 @@ export function getProducts(filters = {}) {
 
     if (filters.categories && filters.categories.length > 0) {
         filteredProducts = filteredProducts.filter((product) => filters.categories.includes(product.category.toLowerCase()));
+    }
+
+    switch (sortingOption) {
+        case "az":
+            filteredProducts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+            break;
+        case "za":
+            filteredProducts.sort((a, b) => b.name.toLowerCase().localeCompare(a.name.toLowerCase()));
+            break;
+        case "lowHigh":
+            filteredProducts.sort((a, b) => a.price - b.price);
+            break;
+        case "highLow":
+            filteredProducts.sort((a, b) => b.price - a.price);
+            break;
     }
 
     return filteredProducts;
