@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import { getProducts } from '../../services/productsService';
+import Footer from '../footer/Footer';
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -68,6 +69,8 @@ const Home = () => {
                     )}
                 </section>
             </div>
+
+            <Footer />
         </>
     )
 }
