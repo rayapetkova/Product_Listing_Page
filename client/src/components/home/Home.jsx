@@ -9,7 +9,8 @@ import { useEffect, useState } from "react";
 import { getProducts } from '../../services/productsService';
 
 const Home = () => {
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState([]);
+    const [visibleProductsCount, setVisibleProductsCount] = useState(5);
     const [sortingOption, setSortingOption] = useState("az");
     const [filters, setFilters] = useState({
         categories: [],
@@ -20,10 +21,16 @@ const Home = () => {
         function loadProducts() {
             const products = getProducts(filters, sortingOption);
             setProducts(products);
+
+            setVisibleProductsCount(products.length < 5 ? products.length : 5);
         }
 
         loadProducts();
     }, [filters, sortingOption])
+
+    function loadMoreProductsHandler() {
+        setVisibleProductsCount(prevCount => prevCount + 5);
+    }
 
     function sortingOptionSetter(option) {
         setSortingOption(option);
@@ -43,23 +50,22 @@ const Home = () => {
             </section>
 
             <div className={styles["content-layout"]}>
-
                 <aside className={styles["filters"]}>
                     <Filters filters={filters} setFilters={setFilters} />
                 </aside>
 
                 <section className={styles["products-section"]}>
+                    <SortBar visibleProductsCount={visibleProductsCount} productsCount={products.length} sortingOptionSetter={sortingOptionSetter} />
 
-                    <SortBar productsCount={products.length} sortingOptionSetter={sortingOptionSetter} />
+                    <ProductGrid products={products.slice(0, visibleProductsCount)} filters={filters} sortingOption={sortingOption} />
 
-                    <ProductGrid products={products} filters={filters} sortingOption={sortingOption} />
-
-                    <div className={styles["load-more-container"]}>
-                        <button className={styles["load-more-btn"]}>
-                            Load More
-                        </button>
-                    </div>
-
+                    {visibleProductsCount < products.length && (
+                        <div onClick={loadMoreProductsHandler} className={styles["load-more-container"]}>
+                            <button className={styles["load-more-btn"]}>
+                                Load More
+                            </button>
+                        </div>
+                    )}
                 </section>
             </div>
         </>

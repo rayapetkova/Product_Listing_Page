@@ -1,6 +1,6 @@
 import styles from './SortBar.module.css';
 
-const SortBar = ({ productsCount, sortingOptionSetter }) => {
+const SortBar = ({ visibleProductsCount, productsCount, sortingOptionSetter }) => {
     const sortingOptionChangeHandler = (e) => {
         sortingOptionSetter(e.target.value);
     }
@@ -8,9 +8,9 @@ const SortBar = ({ productsCount, sortingOptionSetter }) => {
     return (
         <div className={styles["sort-bar"]}>
             <div className={styles["product-counter"]}>
-                3 out of {productsCount} products displayed
+                {visibleProductsCount} out of {productsCount} products displayed
             </div>
-            
+
             <div className={styles["sort-dropdown"]}>
                 <label htmlFor="sort">Sort by: </label>
                 <select id="sort" onChange={sortingOptionChangeHandler}>
