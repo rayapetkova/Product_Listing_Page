@@ -4,6 +4,8 @@ import { addProduct } from '../../services/productsService';
 import { productSchema } from '../../schemas/productSchema';
 import { useNavigate } from 'react-router-dom';
 import { categories } from '../../data/categories';
+import MessageToast from '../messageToast/MessageToast';
+import { useState } from 'react';
 
 const formNames = {
     name: 'name',
@@ -16,12 +18,30 @@ const formNames = {
 }
 
 const ProductsAdd = () => {
+    const [message, setMessage] = useState({
+        text: "",
+        type: ""
+    })
     const navigate = useNavigate();
 
     const addProductSubmitHandler = (values) => {
-        addProduct(values);
+        const [messageText, messageType] = addProduct(values);
 
-        navigate('/');
+        setMessage({
+            text: messageText,
+            type: messageType
+        });
+
+        setTimeout(() => {
+            setMessage({
+                text: "",
+                type: ""
+            });
+        }, 4000);
+
+        if (messageType === "success") {
+            navigate("/");
+        }
     }
 
     const { values, handleChange, handleSubmit, handleBlur, errors, touched } = useFormik({
@@ -45,7 +65,6 @@ const ProductsAdd = () => {
 
                 <form onSubmit={handleSubmit}>
 
-                    {/* Name */}
                     <div className={styles["form-group"]}>
                         <label htmlFor="name">Name</label>
                         <input
@@ -60,7 +79,6 @@ const ProductsAdd = () => {
                             <p className={styles["error-text"]}>{errors.name}</p>}
                     </div>
 
-                    {/* Category */}
                     <div className={styles["form-group"]}>
                         <label htmlFor="category">Category</label>
                         <select
@@ -81,7 +99,6 @@ const ProductsAdd = () => {
                             <p className={styles["error-text"]}>{errors.category}</p>}
                     </div>
 
-                    {/* Description */}
                     <div className={styles["form-group"]}>
                         <label htmlFor="description">Description</label>
                         <textarea
@@ -95,7 +112,6 @@ const ProductsAdd = () => {
                             <p className={styles["error-text"]}>{errors.description}</p>}
                     </div>
 
-                    {/* Price */}
                     <div className={styles["form-group"]}>
                         <label htmlFor="price">Price</label>
                         <input
@@ -111,7 +127,6 @@ const ProductsAdd = () => {
                             <p className={styles["error-text"]}>{errors.price}</p>}
                     </div>
 
-                    {/* Rating */}
                     <div className={styles["form-group"]}>
                         <label htmlFor="rating">Rating</label>
                         <input
@@ -129,7 +144,6 @@ const ProductsAdd = () => {
                             <p className={styles["error-text"]}>{errors.rating}</p>}
                     </div>
 
-                    {/* Image URL */}
                     <div className={styles["form-group"]}>
                         <label htmlFor="imageUrl">Image URL</label>
                         <input
@@ -144,7 +158,6 @@ const ProductsAdd = () => {
                             <p className={styles["error-text"]}>{errors.imageUrl}</p>}
                     </div>
 
-                    {/* Color */}
                     <div className={styles["form-group"]}>
                         <label htmlFor="color">Color</label>
                         <input
@@ -159,10 +172,11 @@ const ProductsAdd = () => {
                             <p className={styles["error-text"]}>{errors.color}</p>}
                     </div>
 
+                    <MessageToast message={message.text} typeMessage={message.type} />
+
                     <button type="submit" className={styles["submit-btn"]}>
                         Add Product
                     </button>
-
                 </form>
             </div>
         </div>

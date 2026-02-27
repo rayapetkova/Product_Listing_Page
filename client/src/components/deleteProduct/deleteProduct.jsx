@@ -3,6 +3,7 @@ import { deleteProduct, getProductById } from '../../services/productsService';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import ProductCard from '../productsDisplay/productCard/ProductCard';
 import { useEffect, useState } from 'react';
+import MessageToast from '../messageToast/MessageToast';
 
 const formNames = {
     name: 'name',
@@ -17,6 +18,10 @@ const formNames = {
 const DeleteProduct = () => {
     const { productId } = useParams();
     const [product, setProduct] = useState({});
+    const [message, setMessage] = useState({
+        text: "",
+        type: ""
+    });
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -29,9 +34,23 @@ const DeleteProduct = () => {
     }, [])
 
     const deleteProductSubmitHandler = () => {
-        deleteProduct(productId);
+        const [messageText, messageType] = deleteProduct(productId);
 
-        navigate('/');
+        setMessage({
+            text: messageText,
+            type: messageType
+        });
+
+        setTimeout(() => {
+            setMessage({
+                text: "",
+                type: ""
+            });
+        }, 4000);
+
+        if (messageType === "success") {
+            navigate("/");
+        }
     }
 
     return (
@@ -43,6 +62,8 @@ const DeleteProduct = () => {
                     Are you sure you want to permanently remove this product?
                     This action cannot be undone.
                 </p>
+
+                <MessageToast message={message.text} typeMessage={message.type} />
 
                 <ProductCard product={product} />
 

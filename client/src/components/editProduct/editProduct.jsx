@@ -5,6 +5,7 @@ import { productSchema } from '../../schemas/productSchema';
 import { useNavigate, useParams } from 'react-router-dom';
 import { categories } from '../../data/categories';
 import { useEffect, useState } from 'react';
+import MessageToast from '../messageToast/MessageToast';
 
 const formNames = {
     id: 'id',
@@ -21,6 +22,10 @@ const EditProduct = () => {
     const navigate = useNavigate();
     const { productId } = useParams();
     const [product, setProduct] = useState({});
+    const [message, setMessage] = useState({
+        text: "",
+        type: ""
+    })
 
     useEffect(() => {
         function loadProduct() {
@@ -32,9 +37,23 @@ const EditProduct = () => {
     }, [])
 
     const editProductSubmitHandler = (values) => {
-        editProduct(product.id, values);
+        const [messageText, messageType] = editProduct(product.id, values);
 
-        navigate(`/${product.id}`);
+        setMessage({
+            text: messageText,
+            type: messageType
+        });
+
+        setTimeout(() => {
+            setMessage({
+                text: "",
+                type: ""
+            });
+        }, 4000);
+
+        if (messageType === "success") {
+            navigate(`/${product.id}`);
+        }
     }
 
     const { values, handleChange, handleSubmit, handleBlur, errors, touched } = useFormik({
@@ -59,8 +78,6 @@ const EditProduct = () => {
                 <h2>Edit Product</h2>
 
                 <form onSubmit={handleSubmit}>
-
-                    {/* Name */}
                     <div className={styles["form-group"]}>
                         <label htmlFor="name">Name</label>
                         <input
@@ -71,11 +88,10 @@ const EditProduct = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                         />
-                        {(errors.name && touched.name) &&
-                            <p className={styles["error-text"]}>{errors.name}</p>}
+
+                        {(errors.name && touched.name) && <p className={styles["error-text"]}>{errors.name}</p>}
                     </div>
 
-                    {/* Category */}
                     <div className={styles["form-group"]}>
                         <label htmlFor="category">Category</label>
                         <select
@@ -92,11 +108,10 @@ const EditProduct = () => {
                                 </option>
                             ))}
                         </select>
-                        {(errors.category && touched.category) &&
-                            <p className={styles["error-text"]}>{errors.category}</p>}
+
+                        {(errors.category && touched.category) && <p className={styles["error-text"]}>{errors.category}</p>}
                     </div>
 
-                    {/* Description */}
                     <div className={styles["form-group"]}>
                         <label htmlFor="description">Description</label>
                         <textarea
@@ -106,11 +121,10 @@ const EditProduct = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                         />
-                        {(errors.description && touched.description) &&
-                            <p className={styles["error-text"]}>{errors.description}</p>}
+
+                        {(errors.description && touched.description) && <p className={styles["error-text"]}>{errors.description}</p>}
                     </div>
 
-                    {/* Price */}
                     <div className={styles["form-group"]}>
                         <label htmlFor="price">Price</label>
                         <input
@@ -122,11 +136,10 @@ const EditProduct = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                         />
-                        {(errors.price && touched.price) &&
-                            <p className={styles["error-text"]}>{errors.price}</p>}
+
+                        {(errors.price && touched.price) && <p className={styles["error-text"]}>{errors.price}</p>}
                     </div>
 
-                    {/* Rating */}
                     <div className={styles["form-group"]}>
                         <label htmlFor="rating">Rating</label>
                         <input
@@ -140,11 +153,10 @@ const EditProduct = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                         />
-                        {(errors.rating && touched.rating) &&
-                            <p className={styles["error-text"]}>{errors.rating}</p>}
+
+                        {(errors.rating && touched.rating) && <p className={styles["error-text"]}>{errors.rating}</p>}
                     </div>
 
-                    {/* Image URL */}
                     <div className={styles["form-group"]}>
                         <label htmlFor="imageUrl">Image URL</label>
                         <input
@@ -155,11 +167,10 @@ const EditProduct = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                         />
-                        {(errors.imageUrl && touched.imageUrl) &&
-                            <p className={styles["error-text"]}>{errors.imageUrl}</p>}
+
+                        {(errors.imageUrl && touched.imageUrl) && <p className={styles["error-text"]}>{errors.imageUrl}</p>}
                     </div>
 
-                    {/* Color */}
                     <div className={styles["form-group"]}>
                         <label htmlFor="color">Color</label>
                         <input
@@ -170,9 +181,11 @@ const EditProduct = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                         />
-                        {(errors.color && touched.color) &&
-                            <p className={styles["error-text"]}>{errors.color}</p>}
+
+                        {(errors.color && touched.color) && <p className={styles["error-text"]}>{errors.color}</p>}
                     </div>
+
+                    <MessageToast message={message.text} typeMessage={message.type} />
 
                     <button type="submit" className={styles["submit-btn"]}>
                         Save Changes
