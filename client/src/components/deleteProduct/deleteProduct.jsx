@@ -5,16 +5,6 @@ import ProductCard from '../productsDisplay/productCard/ProductCard';
 import { useEffect, useState } from 'react';
 import MessageToast from '../messageToast/MessageToast';
 
-const formNames = {
-    name: 'name',
-    category: 'category',
-    description: 'description',
-    price: 'price',
-    rating: 'rating',
-    imageUrl: 'imageUrl',
-    color: 'color'
-}
-
 const DeleteProduct = () => {
     const { productId } = useParams();
     const [product, setProduct] = useState({});
