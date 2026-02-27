@@ -80,9 +80,9 @@ const ProductCard = ({ product }) => {
             </div>
 
             <div className={styles["product-card-buttons"]}>
-                <Link to={`/${product.id}`}>More Details</Link>
-                <Link to={`/${product.id}/edit`}>Edit</Link>
-                <Link to={`/${product.id}/delete`}>Delete</Link>
+                <Link to={`/products/${product.id}`}>More Details</Link>
+                <Link to={`/products/${product.id}/edit`}>Edit</Link>
+                <Link to={`/products/${product.id}/delete`}>Delete</Link>
             </div>
 
             {existingProductInCart ? (

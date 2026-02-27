@@ -67,7 +67,7 @@ const DeleteProduct = () => {
                         </button>
 
                         <Link
-                            to={`/${product.id}`}
+                            to={`/products/${product.id}`}
                             className={styles["cancel-link"]}
                         >
                             Cancel

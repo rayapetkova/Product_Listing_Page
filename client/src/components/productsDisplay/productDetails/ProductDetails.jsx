@@ -33,7 +33,7 @@ const ProductDetails = () => {
                 <p>Category: {product.category}</p>
 
                 <div className={styles["product-actions"]}>
-                    <Link to={`/${product.id}/edit`}>Edit</Link>
+                    <Link to={`/products/${product.id}/edit`}>Edit</Link>
                     <button>Add to Cart</button>
                 </div>
             </div>
