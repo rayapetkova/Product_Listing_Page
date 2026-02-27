@@ -1,1 +1,6 @@
-export const categories = ["shoes", "bags", "clothes"];
+export const categories = [
+    "running",
+    "casual",
+    "basketball",
+    "formal"
+];
