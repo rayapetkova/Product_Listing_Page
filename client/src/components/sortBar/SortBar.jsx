@@ -8,7 +8,7 @@ const SortBar = ({ visibleProductsCount, productsCount, sortingOptionSetter }) =
     return (
         <div className={styles["sort-bar"]}>
             <div className={styles["product-counter"]}>
-                {visibleProductsCount} out of {productsCount} products displayed
+                {visibleProductsCount <= productsCount ? visibleProductsCount : productsCount} out of {productsCount} products displayed
             </div>
 
             <div className={styles["sort-dropdown"]}>

@@ -45,7 +45,7 @@ const Home = () => {
                     Do you have a product that you want to sell? Add it to our marketplace and reach a wide audience of potential buyers.
                 </p>
 
-                <Link to="/add" className={styles["add-product-btn"]}>
+                <Link to="/products/add" className={styles["add-product-btn"]}>
                     Add Product
                 </Link>
             </section>
